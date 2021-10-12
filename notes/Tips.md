@@ -7,4 +7,4 @@ $$
 mid = \frac{b+a}{2}
 $$
 The reason is the second formula might cause overflow.
- 
+  
