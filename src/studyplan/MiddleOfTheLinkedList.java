@@ -11,7 +11,7 @@ package studyplan;
 public class MiddleOfTheLinkedList {
 
 	public static void main(String[] args) {
-		int[] ele = {1};
+		int[] ele = {1,2,3,4,5,6};
 		ListNode nextNode = new ListNode(ele[ele.length-1]);
 		for (int i = ele.length-2; i >= 0; i--) {
 			nextNode = new ListNode(ele[i], nextNode);
@@ -21,20 +21,36 @@ public class MiddleOfTheLinkedList {
 		System.out.println(ans.val);
 	}
 	
+	// version 1
+//	public ListNode middleNode(ListNode head) {
+//        ListNode tmpNode = head;
+//        int nodeCnt = 1;
+//        while (tmpNode.next != null) {
+//			tmpNode = tmpNode.next;
+//			nodeCnt++;
+//		}
+//        tmpNode = head;
+//        int mid = nodeCnt/2+1;
+//        if(mid == 1) return tmpNode;
+//        for (int i = 1; i < mid; i++) {
+//        	tmpNode = tmpNode.next;
+//		}
+//        return tmpNode;
+//    }
+	
+	// Two pointers
 	public ListNode middleNode(ListNode head) {
-        ListNode tmpNode = head;
-        int nodeCnt = 1;
-        while (tmpNode.next != null) {
-			tmpNode = tmpNode.next;
-			nodeCnt++;
+        ListNode fastNode = head;
+        ListNode slowNode = head;
+        int times = 0;
+        while (fastNode.next != null) {
+        	fastNode = fastNode.next;
+        	if (times % 2 == 1) {
+        		slowNode = slowNode.next;
+			}
+        	times++;
 		}
-        tmpNode = head;
-        int mid = nodeCnt/2+1;
-        if(mid == 1) return tmpNode;
-        for (int i = 1; i < mid; i++) {
-        	tmpNode = tmpNode.next;
-		}
-        return tmpNode;
+        return (times % 2 == 1) ? slowNode.next : slowNode;
     }
 
 }
