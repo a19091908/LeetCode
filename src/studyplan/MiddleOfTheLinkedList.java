@@ -8,18 +8,19 @@
 //1 <= Node.val <= 100
 package studyplan;
 
+import definedDS.ListNode;
+
 public class MiddleOfTheLinkedList {
 
 	public static void main(String[] args) {
 		int[] ele = {1,2,3,4,5,6};
-		ListNode nextNode = new ListNode(ele[ele.length-1]);
-		for (int i = ele.length-2; i >= 0; i--) {
-			nextNode = new ListNode(ele[i], nextNode);
-		}
+		ListNode nextNode = ListNode.constructLinkedList(ele);
 		
 		ListNode ans = new MiddleOfTheLinkedList().middleNode(nextNode);
 		System.out.println(ans.val);
 	}
+
+	
 	
 	// version 1
 //	public ListNode middleNode(ListNode head) {
@@ -53,22 +54,4 @@ public class MiddleOfTheLinkedList {
         return (times % 2 == 1) ? slowNode.next : slowNode;
     }
 
-}
-
-//Definition for singly-linked list.
-class ListNode {
-	int val;
-	ListNode next;
-
-	ListNode() {
-	}
-
-	ListNode(int val) {
-		this.val = val;
-	}
-
-	ListNode(int val, ListNode next) {
-		this.val = val;
-		this.next = next;
-	}
 }
