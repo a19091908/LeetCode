@@ -31,6 +31,31 @@ public class MaxAreaOfIsland {
 	}
 	
 	public int maxAreaOfIsland(int[][] grid) {
+		int max = 0;
+		boolean[][] visited = new boolean[grid.length][grid[0].length];
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (visited[i][j] == false) {
+					if (grid[i][j] == 1) {
+						max = Math.max(max, computeArea(i,j,grid,visited));
+					}
+				}else {
+					visited[i][j] = true;
+				}
+				
+			}
+		}
+		return max;
+	}
+
+	private int computeArea(int i, int j, int[][] grid, boolean[][] visited) {
+		if (0 <= i && i < grid.length && 0 <= j && j < grid[0].length && visited[i][j] == false) {
+			visited[i][j] = true;
+			if (grid[i][j] == 1) {
+				return 1 + computeArea(i+1, j, grid, visited) + computeArea(i-1, j, grid, visited) 
+				         + computeArea(i, j+1, grid, visited) + computeArea(i, j-1, grid, visited);
+			}
+		}
 		return 0;
 	}
 
